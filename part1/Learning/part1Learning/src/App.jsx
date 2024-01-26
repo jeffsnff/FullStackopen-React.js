@@ -6,8 +6,7 @@ const App = () => {
 
   return(
     <>
-      <Hello name='Paola' age={a+b} />
-      <p>How are you doing this morning?</p>
+      <Hello/>
     </>
   )
 }

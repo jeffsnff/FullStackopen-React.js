@@ -1,10 +1,13 @@
 
-const Hello = (props) => {
-    console.log(props);
+const Hello = () => {
+    const friends = [
+        {name: 'Paola', age: 29},
+        {name: 'Jeff',  age: 34}
+    ]
+
     return(
         <div>
-            <h1>Hello {props.name}</h1>
-            <p>You are {props.age}</p>
+            <p>{friends[0].name} is an amazing woman. She is dating {friends[1].name}</p>
         </div>
     )
 }
