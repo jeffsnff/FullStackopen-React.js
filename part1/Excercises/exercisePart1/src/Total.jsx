@@ -1,9 +1,9 @@
 
 const Total = (props) => {
-
+  const [exercise1, exercise2, exercise3] = props.exercises;
     return(
         <>
-            <p>Number of exercieses {props.exercises1 + props.exercises2 + props.exercises3} </p>
+            <p>Number of exercieses {exercise1 + exercise2 + exercise3} </p>
         </>
     );
 }

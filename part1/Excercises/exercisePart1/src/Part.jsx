@@ -1,9 +1,9 @@
 
 const Part = (props) => {
-
+  const { name, exercise } = props;
   return(
     <>
-      <p>{props.name} {props.exercise}</p>
+      <p>{name} {exercise}</p>
     </>
   );
 }
