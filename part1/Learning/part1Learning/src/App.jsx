@@ -1,12 +1,15 @@
 import Hello from './Hello.jsx'
-const App = () => {
-  const a = 20;
-  const b = 9;
+const App = ({counter}) => {
 
+  const name = 'Peter';
+  const age = 31;
 
   return(
     <>
-      <Hello/>
+      <h1>Greetings!</h1>
+      <Hello name='Maya' age={26+10} />
+      <Hello name={name} age={age} />
+      <p>{counter}</p>
     </>
   )
 }

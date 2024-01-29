@@ -1,13 +1,13 @@
 
-const Hello = () => {
-    const friends = [
-        {name: 'Paola', age: 29},
-        {name: 'Jeff',  age: 34}
-    ]
+const Hello = ({ name, age }) => {
+  const YOB = () => {
+    return new Date().getFullYear() - age;
+  }
 
     return(
         <div>
-            <p>{friends[0].name} is an amazing woman. She is dating {friends[1].name}</p>
+            <p>Hello {name}, you are {age} years old</p>
+            <p>I bet you were born in {YOB()}</p>
         </div>
     )
 }
