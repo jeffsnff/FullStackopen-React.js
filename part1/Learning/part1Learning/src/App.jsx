@@ -2,33 +2,42 @@ import { useState } from 'react';
 import Hello from './Hello.jsx';
 import Display from './Display.jsx';
 import Button from './Button.jsx';
+import History from './History.jsx';
 
 
 const App = () => {
 
-  const [ counter, setCounter ] = useState(0);
-  const name = 'Peter';
-  const age = 31;
+  const [ left, setLeft ] = useState(0);
+  const [ right, setRight ] = useState(0);
+  const [ allClicks, setAll ] = useState([]);
+  const [ totalButtonPress, setTotalButtonPress ] = useState(0);
 
-const increaseByOne = () => {
-  setCounter(counter+1);
-}
-const decreaseByOne = () => {
-  setCounter(counter-1);
-}
-const setToZero = () => {
-  setCounter(0);
-}
+  const handleLeftClick = () => {
+    setLeft(left+1);
+    handleAll('Left');
 
+  }
+
+const handleRightClick = () => {
+  setRight(right+1);
+  handleAll('Right');
+}
+const handleAll = (buttonClicked) => {
+  setAll(allClicks.concat(buttonClicked))
+  handleButtonPress();
+}
+const handleButtonPress = () => {
+  setTotalButtonPress(totalButtonPress+1);
+}
   return(
     <>
-      <h1>Greetings!</h1>
-      <Hello name='Maya' age={26+10} />
-      <Hello name={name} age={age} />
-      <Display count={counter} />
-      <Button onClick={increaseByOne} name={'Increase Counter'} />
-      <Button onClick={decreaseByOne} name={'Decrease Counter'} />
-      <Button onClick={setToZero} name={'Reset Counter'} />
+      <h1>Part 1 Exercises</h1>
+      <Display text={'Left Click : '} count={left} />
+      <Button onClick={handleLeftClick} name={'Left Click'} />
+      <Display text={'Right Click : '} count={right} />
+      <Button onClick={handleRightClick} name={'Right Click'} />
+      <History allClicks={allClicks} />
+      <p>Total Button Press : {totalButtonPress}</p>
     </>
   )
 }

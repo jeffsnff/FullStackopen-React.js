@@ -1,10 +1,10 @@
 
 
-const Display = ({count}) => {
+const Display = ({text, count}) => {
   return(
     <>
       <p>
-        {count}
+        {text} {count}
       </p>
     </>
   );
