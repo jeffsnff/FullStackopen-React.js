@@ -6,8 +6,7 @@ const Hello = ({ name, age }) => {
 
     return(
         <div>
-            <p>Hello {name}, you are {age} years old</p>
-            <p>I bet you were born in {YOB()}</p>
+            <h1>Part 1 Excercises</h1>
         </div>
     )
 }

@@ -31,7 +31,9 @@ const handleButtonPress = () => {
 }
   return(
     <>
-      <h1>Part 1 Exercises</h1>
+      {/* Do not change the Hello*/}
+      <Hello />
+
       <Display text={'Left Click : '} count={left} />
       <Button onClick={handleLeftClick} name={'Left Click'} />
       <Display text={'Right Click : '} count={right} />
