@@ -1,8 +1,5 @@
 
 const Display  = ({ 
-  good,
-  bad,
-  neutral,
   totalFeedback,
   positiveFeedback,
   average

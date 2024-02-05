@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from './Button.jsx';
-import Display from './Display.jsx';
 import Statistic from './Statistic.jsx';
 
 const Feedback = () => {
@@ -10,7 +9,6 @@ const Feedback = () => {
   const [ neutral, setNeutral ] = useState(0);
   const [ totalFeedback, setTotalFeedback ] = useState(0);
   const [ positiveFeedback, setPositiveFeedback ] = useState(0);
-  const [ average, setAverage ] = useState(0);
 
   const handleGood = () => {
     setGood(good+1);
