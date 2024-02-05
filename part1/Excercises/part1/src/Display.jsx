@@ -13,19 +13,10 @@ const Display  = ({
     <>
     <h2>Statistics</h2>
       <div>
-        Good : {good}
-      </div>
-      <div>
-        Neutral : {neutral}
-      </div>
-      <div>
-        Bad : {bad}
-      </div>
-      <div>
         Total Votes : {totalFeedback}
       </div>
       <div>
-        Average : {average}%
+        Average : {average}
       </div>
       <div>
         Positive : {positiveFeedback}%

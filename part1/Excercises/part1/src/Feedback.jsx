@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Button from './Button.jsx';
 import Display from './Display.jsx';
+import Statistic from './Statistic.jsx';
+
 const Feedback = () => {
 
   const [ good, setGood ] = useState(0);
@@ -8,7 +10,7 @@ const Feedback = () => {
   const [ neutral, setNeutral ] = useState(0);
   const [ totalFeedback, setTotalFeedback ] = useState(0);
   const [ positiveFeedback, setPositiveFeedback ] = useState(0);
-  const [ average, setAverage ] = useState(0)
+  const [ average, setAverage ] = useState(0);
 
   const handleGood = () => {
     setGood(good+1);
@@ -44,13 +46,14 @@ const Feedback = () => {
       <Button onClickFunction={handleGood} buttonName={'Good'} />
       <Button onClickFunction={handleBad} buttonName={'Bad'} />
       <Button onClickFunction={handleNeutral} buttonName={'Neutral'} />
-      <Display 
-        good={good}
-        bad={bad}
-        neutral={neutral}
-        totalFeedback={totalFeedback}
-        positiveFeedback={positiveFeedback}
-      />
+
+      <h2>Statistics</h2>
+      <Statistic data={good} name={'Good'} />
+      <Statistic data={neutral} name={'Neutral'} />
+      <Statistic data={bad} name={'Bad'} />
+      <Statistic data={totalFeedback} name={'Total Votes'} />
+      <Statistic data={positiveFeedback} name={'Positive Percent'} percentSign={'%'} />
+
     </>
     
   )
