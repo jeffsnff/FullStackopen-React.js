@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from './Button.jsx';
-import Statistic from './Statistic.jsx';
+import Display from './Display.jsx';
 
 const Feedback = () => {
 
@@ -37,7 +37,7 @@ const Feedback = () => {
     }
   }
 
-
+  
 
   return(
     <>
@@ -46,12 +46,7 @@ const Feedback = () => {
       <Button onClickFunction={handleNeutral} buttonName={'Neutral'} />
 
       <h2>Statistics</h2>
-      <Statistic data={good} name={'Good'} />
-      <Statistic data={neutral} name={'Neutral'} />
-      <Statistic data={bad} name={'Bad'} />
-      <Statistic data={totalFeedback} name={'Total Votes'} />
-      <Statistic data={positiveFeedback} name={'Positive Percent'} percentSign={'%'} />
-
+      <Display good={good} bad={bad} neutral={neutral} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback} />
     </>
     
   )
