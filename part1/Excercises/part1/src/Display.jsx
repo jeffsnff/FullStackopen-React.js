@@ -1,5 +1,14 @@
 
-const Rating  = ({ good, bad, neutral }) => {
+const Display  = ({ 
+  good,
+  bad,
+  neutral,
+  totalFeedback,
+  positiveFeedback,
+  average
+
+}) => {
+
   return (
     <>
     <h2>Statistics</h2>
@@ -12,8 +21,17 @@ const Rating  = ({ good, bad, neutral }) => {
       <div>
         Bad : {bad}
       </div>
+      <div>
+        Total Votes : {totalFeedback}
+      </div>
+      <div>
+        Average : {average}%
+      </div>
+      <div>
+        Positive : {positiveFeedback}%
+      </div>
     </>
   );
 }
 
-export default Rating;
+export default Display;
