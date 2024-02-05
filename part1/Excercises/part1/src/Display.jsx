@@ -5,7 +5,8 @@ const Display  = ({
   neutral,
   bad,
   totalFeedback,
-  positiveFeedback
+  positiveFeedback,
+  average
 
 }) => {
 
@@ -21,6 +22,7 @@ const Display  = ({
         <Statistic data={bad} name={'Bad'} />
         <Statistic data={totalFeedback} name={'Total Votes'} />
         <Statistic data={positiveFeedback} name={'Positive Percent'} percentSign={'%'} />
+        <Statistic data={average} name={'Average'} />
       </>
     )
   }

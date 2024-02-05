@@ -9,6 +9,7 @@ const Feedback = () => {
   const [ neutral, setNeutral ] = useState(0);
   const [ totalFeedback, setTotalFeedback ] = useState(0);
   const [ positiveFeedback, setPositiveFeedback ] = useState(0);
+  const [ average, setAverage ] = useState(0);
 
   const handleGood = () => {
     setGood(good+1);
@@ -28,16 +29,29 @@ const Feedback = () => {
   }
   const handleTotal = (good, bad, neutral) => {
     setTotalFeedback(good+bad+neutral)
+    
+    // Calculates Postive feedback score
+    const tempTotalFeedback = totalFeedback+1;
     if(good === 0){
       setPositiveFeedback(0);
     }else{
-      const tempTotalFeedback = totalFeedback+1;
       const percentage = good/tempTotalFeedback*100;
       setPositiveFeedback(percentage);
     }
+    // Calculates Average Feedback score
+    if(totalFeedback === 0){
+      setAverage(0);
+    }else{
+      const weightedBad = -1;
+      const weightedGood = 1;
+      const weightedNeutral = 0;
+      const average = (
+          (good*weightedGood) +
+          (neutral*weightedNeutral) +
+          (bad*weightedBad))/tempTotalFeedback;
+      setAverage(average);
+    }
   }
-
-  
 
   return(
     <>
@@ -46,7 +60,7 @@ const Feedback = () => {
       <Button onClickFunction={handleNeutral} buttonName={'Neutral'} />
 
       <h2>Statistics</h2>
-      <Display good={good} bad={bad} neutral={neutral} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback} />
+      <Display good={good} bad={bad} neutral={neutral} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback} average={average} />
     </>
     
   )
