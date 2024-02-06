@@ -2,9 +2,15 @@
 const Statistic = ({data, name, percentSign}) => {
 
   return(
-    <div>
-      {name} : {data}{percentSign}
-    </div>
+    <tr>
+      <td>
+      {name} : 
+    </td>
+    <td>
+      {data}{percentSign}
+    </td>
+    </tr>
+    
     
   )
 }

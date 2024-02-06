@@ -16,14 +16,23 @@ const Display  = ({
     )
   }else{
     return(
-      <>
-        <Statistic data={good} name={'Good'} />
-        <Statistic data={neutral} name={'Neutral'} />
-        <Statistic data={bad} name={'Bad'} />
-        <Statistic data={totalFeedback} name={'Total Votes'} />
-        <Statistic data={positiveFeedback} name={'Positive Percent'} percentSign={'%'} />
-        <Statistic data={average} name={'Average'} />
-      </>
+      <table>
+        <thead>
+          <tr>
+            <td>Rating</td>
+            <td>Score</td>
+          </tr>
+        </thead>
+        <tbody>
+            <Statistic data={good} name={'Good'} />
+            <Statistic data={neutral} name={'Neutral'} />
+            <Statistic data={bad} name={'Bad'} />
+            <Statistic data={totalFeedback} name={'Total Votes'} />
+            <Statistic data={positiveFeedback} name={'Positive Rating'} percentSign={'%'} />
+            <Statistic data={average} name={'Average Rating'} />
+        </tbody>
+      </table>
+        
     )
   }
 }
