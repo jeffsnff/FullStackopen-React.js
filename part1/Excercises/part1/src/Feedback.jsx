@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from './Button.jsx';
 import Display from './Display.jsx';
+import Anecdotes from './Anecdotes.jsx';
 
 const Feedback = () => {
 
@@ -61,6 +62,7 @@ const Feedback = () => {
 
       <h2>Statistics</h2>
       <Display good={good} bad={bad} neutral={neutral} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback} average={average} />
+      <Anecdotes />
     </>
     
   )
