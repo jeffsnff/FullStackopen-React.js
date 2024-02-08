@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from './Button.jsx';
 
 const Anecdotes = () => {
+  let anecdote = 0;
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -12,16 +13,28 @@ const Anecdotes = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-  const [ selected, setSelected ] = useState(0);
 
+  const [ selected, setSelected ] = useState(anecdote);
+  const [ vote, setVote ] = useState(
+    {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0})
+  const [ displayVote, setDisplayVote ] = useState(selected)
+  
   const handleAnecdote = () => {
     const number = Math.floor(Math.random() * 8);
     setSelected(number);
+    setDisplayVote(vote[number]);
   }
-
+  const handleVote = () => {
+    let copyVote = {...vote};
+    copyVote[selected] = copyVote[selected] + 1;
+    setVote(copyVote);
+  }
+  
   return (
     <>
       <p>Qoute : {anecdotes[selected]}</p>
+      <p>Votes : {displayVote}</p>
+      <Button onClickFunction={handleVote} buttonName={'Vote'} />
       <Button onClickFunction={handleAnecdote} buttonName={'New Anecdote'} />
     </>
   );
