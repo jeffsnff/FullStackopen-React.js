@@ -1,22 +1,54 @@
 import Course from './Course.jsx';
-import Total from "./Total.jsx";
 
 const App = () => {
-  const course = {
-    id: 1,
-    courseName : 'Half stack application development',
-    sections : [
-      {id: 1, sectionName : 'Fundamentals of React', numExercises : 10},
-      {id: 2, sectionName : 'Using props to pass data', numExercises: 7},
-      {id: 3, sectionName: 'State of a component', numExercises: 14},
-      {id: 4, sectionName: 'Refactoring Our Project', numExercises: 5}
-    ]
-    
-  }
+  const courses = [
+    {
+      name: 'Half Stack application development',
+      id: 100,
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        }
+      ]
+    }, 
+    {
+      name: 'Node.js',
+      id: 200,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ]
 
   return(
     <>
-      <Course courseName={course.courseName} sections={course.sections} exerciseTotal={course.sections} />
+      <Course courseName={courses} />
     </>
   );
 }
