@@ -1,11 +1,18 @@
 import Part from "./Part.jsx";
 
-const Content = (props) => {
+const Content = ({sections}) => {
+
+  let sectionsMapped = sections.map((section) => {
+    return (
+      <p key={section.id}>
+        <Part key={sections.id} name={section.sectionName} exercise={section.numExercises} />
+      </p>
+    );
+  });
+
     return(
         <>
-          <Part name={props.sections.sections[0].sectionName} exercise={props.sections.sections[0].numExercises}/>
-          <Part name={props.sections.sections[1].sectionName} exercise={props.sections.sections[1].numExercises}/>
-          <Part name={props.sections.sections[2].sectionName} exercise={props.sections.sections[2].numExercises}/>
+          {sectionsMapped}
         </>
     );
 }

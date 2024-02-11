@@ -1,25 +1,25 @@
-import Content from "./Content.jsx";
+import Course from './Course.jsx';
 import Total from "./Total.jsx";
-import Header from "./Header.jsx";
 
 const App = () => {
   const course = {
+    id: 1,
     courseName : 'Half stack application development',
     sections : [
-      {sectionName : 'Fundamentals of React', numExercises : 10},
-      {sectionName : 'Using props to pass data', numExercises: 7},
-      {sectionName: 'State of a component', numExercises: 14}
+      {id: 1, sectionName : 'Fundamentals of React', numExercises : 10},
+      {id: 2, sectionName : 'Using props to pass data', numExercises: 7},
+      {id: 3, sectionName: 'State of a component', numExercises: 14},
+      {id: 4, sectionName: 'Refactoring Our Project', numExercises: 5}
     ]
     
   }
 
   return(
     <>
-      <Header course={course} />
-      <Content sections={course}/>
+      <Course courseName={course.courseName} sections={course.sections} />
       <Total numExercises={course}/> 
     </>
-  )
+  );
 }
 
 export default App;
