@@ -2,7 +2,7 @@
 const Total = ({exerciseTotal}) => {
 
   let total = 0;
-  exerciseTotal.sections.map((section) => {
+  exerciseTotal.map((section) => {
     total = total + section.numExercises;
   });
 

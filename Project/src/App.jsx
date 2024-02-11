@@ -16,7 +16,7 @@ const App = () => {
 
   return(
     <>
-      <Course courseName={course.courseName} sections={course.sections} exerciseTotal={course} />
+      <Course courseName={course.courseName} sections={course.sections} exerciseTotal={course.sections} />
     </>
   );
 }
