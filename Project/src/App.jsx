@@ -16,8 +16,7 @@ const App = () => {
 
   return(
     <>
-      <Course courseName={course.courseName} sections={course.sections} />
-      <Total numExercises={course}/> 
+      <Course courseName={course.courseName} sections={course.sections} exerciseTotal={course} />
     </>
   );
 }

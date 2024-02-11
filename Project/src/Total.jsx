@@ -1,10 +1,11 @@
 
-const Total = (props) => {
+const Total = ({exerciseTotal}) => {
 
   let total = 0;
-  props.numExercises.sections.forEach(section => {
+  exerciseTotal.sections.map((section) => {
     total = total + section.numExercises;
-  })
+  });
+
     return(
         <>
             <p>Number of exercieses : {total}</p>
@@ -12,4 +13,4 @@ const Total = (props) => {
     );
 }
 
-export default Total
+export default Total;
