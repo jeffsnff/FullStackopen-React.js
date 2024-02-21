@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Note from './components/Note'
 
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes);
@@ -33,7 +32,7 @@ const App = (props) => {
       </div>
       <ul>
         {notesToShow.map(note => 
-          <Note key={note.id} note={note} />
+          <li key={note.id}>{note.content}</li>
         )}
       </ul>
       <form onSubmit={addNote} >

@@ -1,6 +1,14 @@
-import ReactDOM from 'react-dom/client'
-
+import ReactDOM from 'react-dom/client';
+import axios from 'axios';
 import App from './App'
+
+const notesArray = axios.get('http://localhost:3001/notes')
+  notesArray.then(response => {
+    console.log(response.data)
+  })
+
+const badpromise = axios.get('http://localhost:3001/foobar')
+  console.log(badpromise)
 
 const notes = [
   {
