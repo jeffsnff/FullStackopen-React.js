@@ -4,8 +4,7 @@ import ContactForm from './ContactForm.jsx';
 import Search from './Search.jsx';
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-
+import contactService from './services/contacts.js';
 const App = () => {
   
   const [persons, setPersons] = useState([]);
@@ -14,10 +13,10 @@ const App = () => {
   const [filteredName, setFilterName] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/contacts')
-      .then(response => {
-        setPersons(response.data);
+    contactService
+      .getAll()
+      .then(initialContacts => {
+        setPersons(initialContacts);
       })
   },[]);
 

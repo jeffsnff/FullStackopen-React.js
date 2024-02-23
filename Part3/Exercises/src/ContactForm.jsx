@@ -1,5 +1,6 @@
 import Input from './Input.jsx';
 import Header from './Header.jsx';
+import contactService from './services/contacts.js';
 
 const ContactForm = ({
   persons,
@@ -33,7 +34,11 @@ const ContactForm = ({
       setNewNumber('');
       return;
     }else{
-      setPersons(persons.concat(newEntry));
+      contactService
+        .create(newEntry)
+        .then(returnedContact => {
+          setPersons(persons.concat(returnedContact))
+        })
       setNewName('');
       setNewNumber('');
     }
