@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import Note from './components/Note.jsx';
 import noteService from './services/notes.js';
@@ -43,11 +42,19 @@ const App = () => {
       .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
+      .catch(error => {
+        alert(`The note : ${note.content} has already been deleted.`)
+      })
+      setNotes(notes.filter(note => note.id !== id))
   }
   
   const notesToShow = showAll ? notes : notes.filter((note) => {
     return note.important;
   })
+  const displayNote = notesToShow.map(note => 
+    <Note key={note.id} note={note} toggleImportant={() => toggleImportant(note.id)} />
+  )
+
   return (
     <div>
       <h1>Notes</h1>
@@ -55,10 +62,7 @@ const App = () => {
         <button onClick={() => setShowAll(!showAll)}>Show {showAll ? 'Important' : 'All'}</button>
       </div>
       <ul>
-        {notesToShow.map(note => 
-          <Note key={note.id} note={note} toggleImportant={() => toggleImportant(note.id)} />
-          // <li key={note.id}>{note.content}</li>
-        )}
+        {displayNote}
       </ul>
       <form onSubmit={addNote} >
         <input
