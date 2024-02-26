@@ -24,8 +24,7 @@ const ContactForm = ({
     // Creates new entry object
     const newEntry = {
       name: newName,
-      number: newNumber,
-      id: persons.length + 1
+      number: newNumber
     }
     // Looks to see if person is already in the phonebook
     if(persons.find((person) => person.name === newEntry.name)){

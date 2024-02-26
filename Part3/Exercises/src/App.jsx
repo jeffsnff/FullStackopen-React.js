@@ -5,6 +5,8 @@ import Search from './Search.jsx';
 
 import { useState, useEffect } from 'react';
 import contactService from './services/contacts.js';
+
+
 const App = () => {
   
   const [persons, setPersons] = useState([]);
@@ -20,6 +22,22 @@ const App = () => {
       })
   },[]);
 
+  const deleteNumber = (name,id) => {
+    const confirmation = confirm(`Are you sure you want to delete${name}?`)
+    // console.log(confirmation)
+    if(confirmation){
+      contactService
+        .deleteContact(id)
+        .then(response => {
+          contactService
+            .getAll()
+            .then(updatedContacts => {
+              setPersons(updatedContacts)
+            })
+        })
+    }
+  }
+
   // This filters the persons array
   const filteredList = persons.filter( person => person.name.toLocaleLowerCase().includes(filteredName));
  
@@ -28,7 +46,7 @@ const App = () => {
       <Header headerText={'Phonebook'} />
       <Search filteredName={filteredName} setFilterName={setFilterName} />
       <ContactForm persons={persons} setPersons={setPersons} newName={newName} newNumber={newNumber} setNewName={setNewName} setNewNumber={setNewNumber} />
-      <Contact contactList={filteredList} />
+      <Contact contactList={filteredList} handleDelete={deleteNumber} />
     </>
   );
 }

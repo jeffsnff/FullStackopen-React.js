@@ -1,39 +1,24 @@
 {
   "contacts": [
     {
-      "name": "Arto Hellas",
-      "number": "3215763465",
-      "id": "1"
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": "2"
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "12-43-234345",
-      "id": "3"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    },
-    {
-      "name": "Jeff",
-      "number": "82734098234",
-      "id": "5"
-    },
-    {
-      "id": 6,
+      "id": "0aca",
       "name": "Chad",
-      "number": "209384923"
+      "number": "2093840982394"
     },
     {
-      "id": 7,
+      "id": "f742",
+      "name": "Tina",
+      "number": "29u3490823049"
+    },
+    {
+      "id": "a2f7",
+      "name": "Roland",
+      "number": "293849-823"
+    },
+    {
+      "id": "6c2e",
       "name": "Paola",
-      "number": "293849823"
+      "number": "209384098234"
     }
   ]
 }
