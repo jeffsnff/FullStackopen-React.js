@@ -23,9 +23,9 @@ const App = () => {
   },[]);
 
   const deleteNumber = (name,id) => {
-    const confirmation = confirm(`Are you sure you want to delete${name}?`)
+    const deleteConfirmation = confirm(`Are you sure you want to delete${name}?`)
     // console.log(confirmation)
-    if(confirmation){
+    if(deleteConfirmation){
       contactService
         .deleteContact(id)
         .then(response => {

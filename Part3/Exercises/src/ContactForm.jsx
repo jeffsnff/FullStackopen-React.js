@@ -28,10 +28,26 @@ const ContactForm = ({
     }
     // Looks to see if person is already in the phonebook
     if(persons.find((person) => person.name === newEntry.name)){
-      alert(`${newEntry.name} already exist in the Phonebook.`);
-      setNewName('');
-      setNewNumber('');
-      return;
+      const updateConfirmation = confirm(`${newEntry.name} already exist in the Phonebook, do you want to replace the old phone number with the new one?`);
+
+      if(updateConfirmation){
+        const nameToUpdate = persons.find((person) => person.name === newEntry.name)
+        newEntry.id = nameToUpdate.id
+        contactService
+          .updateContact(newEntry, newEntry.id)
+          .then(response => {
+            contactService
+            .getAll()
+            .then(updatedContacts => {
+              setPersons(updatedContacts)
+            })
+          })
+      }else{
+        setNewName('');
+        setNewNumber('');
+        return;
+      }
+      
     }else{
       contactService
         .create(newEntry)
