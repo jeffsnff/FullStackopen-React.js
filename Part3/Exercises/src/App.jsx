@@ -2,6 +2,8 @@ import Header from './Header.jsx';
 import Contact from './Contact.jsx';
 import ContactForm from './ContactForm.jsx';
 import Search from './Search.jsx';
+import Notification from './Notification.jsx';
+
 
 import { useState, useEffect } from 'react';
 import contactService from './services/contacts.js';
@@ -13,6 +15,7 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filteredName, setFilterName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('Some Error Here');
 
   useEffect(() => {
     contactService
@@ -44,6 +47,7 @@ const App = () => {
   return(
     <>
       <Header headerText={'Phonebook'} />
+      <Notification message={errorMessage} />
       <Search filteredName={filteredName} setFilterName={setFilterName} />
       <ContactForm persons={persons} setPersons={setPersons} newName={newName} newNumber={newNumber} setNewName={setNewName} setNewNumber={setNewNumber} />
       <Contact contactList={filteredList} handleDelete={deleteNumber} />
