@@ -2,11 +2,15 @@ import { useState, useEffect } from 'react';
 
 import Note from './components/Note.jsx';
 import noteService from './services/notes.js';
+import Notification from './components/Notification.jsx';
+import Footer from './components/Footer.jsx';
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [ newNote, setNewNote ] = useState('');
   const [ showAll, setShowAll ] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorTitle, setErrorTitle] = useState(null);
 
   useEffect(() => {
     noteService
@@ -43,7 +47,11 @@ const App = () => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
       .catch(error => {
-        alert(`The note : ${note.content} has already been deleted.`)
+        setErrorTitle(error.message);
+        setErrorMessage(`The note ${note.content} has already been deleted`);
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
       setNotes(notes.filter(note => note.id !== id))
   }
@@ -58,6 +66,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification title={errorTitle} message={errorMessage} />
       <div>
         <button onClick={() => setShowAll(!showAll)}>Show {showAll ? 'Important' : 'All'}</button>
       </div>
@@ -71,6 +80,7 @@ const App = () => {
           onChange={noteHandleChange} />
         <button type='submit'>Save</button>
       </form>
+      <Footer />
     </div>
   )
 }
