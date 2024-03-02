@@ -15,7 +15,8 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filteredName, setFilterName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('Some Error Here');
+  const [message, setMessage] = useState(null);
+  const [messageColor, setMessageColor] = useState(null);
 
   useEffect(() => {
     contactService
@@ -37,8 +38,14 @@ const App = () => {
             .then(updatedContacts => {
               setPersons(updatedContacts)
             })
+          setMessage(`${response.name} has been deleted.`)
+          setMessageColor('green')
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000)
         })
     }
+    
   }
 
   // This filters the persons array
@@ -47,9 +54,22 @@ const App = () => {
   return(
     <>
       <Header headerText={'Phonebook'} />
-      <Notification message={errorMessage} />
+      <Notification 
+        message={message}
+        color={messageColor}
+      />
       <Search filteredName={filteredName} setFilterName={setFilterName} />
-      <ContactForm persons={persons} setPersons={setPersons} newName={newName} newNumber={newNumber} setNewName={setNewName} setNewNumber={setNewNumber} />
+      <ContactForm
+        persons={persons}
+        setPersons={setPersons}
+        newName={newName}
+        newNumber={newNumber}
+        setNewName={setNewName}
+        setNewNumber={setNewNumber} 
+        message={message}
+        setMessage={setMessage}
+        setMessageColor={setMessageColor}
+      />
       <Contact contactList={filteredList} handleDelete={deleteNumber} />
     </>
   );

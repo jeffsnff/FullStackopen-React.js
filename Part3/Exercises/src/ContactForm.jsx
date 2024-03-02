@@ -8,7 +8,10 @@ const ContactForm = ({
   newName,
   setNewName,
   setNewNumber,
-  newNumber
+  newNumber,
+  message,
+  setMessage,
+  setMessageColor
   
   }) => {
 
@@ -40,6 +43,12 @@ const ContactForm = ({
             .getAll()
             .then(updatedContacts => {
               setPersons(updatedContacts)
+              console.log(response)
+              setMessage(`${response.name} contact information has been updated`)
+              setMessageColor('green');
+              setTimeout(() => {
+                setMessage(null)
+              }, 5000)
             })
           })
       }else{
