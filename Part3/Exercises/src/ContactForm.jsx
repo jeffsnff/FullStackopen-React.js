@@ -23,6 +23,7 @@ const ContactForm = ({
 
   const addPerson = (event) => {
     event.preventDefault();
+    
     // Creates new entry object
     const newEntry = {
       name: newName,
