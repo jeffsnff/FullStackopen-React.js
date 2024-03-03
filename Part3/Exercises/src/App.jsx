@@ -17,34 +17,50 @@ const App = () => {
   const [filteredName, setFilterName] = useState('');
   const [message, setMessage] = useState(null);
   const [messageColor, setMessageColor] = useState(null);
-
-  useEffect(() => {
+  
+  function getContacts(){
     contactService
       .getAll()
       .then(initialContacts => {
         setPersons(initialContacts);
-      })
+      }) 
+  }
+  function notificationMessage(message, color){
+    setMessage(message)
+    setMessageColor(color);
+
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000)
+  }
+
+  function resetForm(){
+    setNewName('');
+    setNewNumber('');
+    return;
+  }
+
+  useEffect(() => {
+    getContacts()
   },[]);
 
   const deleteNumber = (name,id) => {
     const deleteConfirmation = confirm(`Are you sure you want to delete${name}?`)
-    // console.log(confirmation)
     if(deleteConfirmation){
       contactService
         .deleteContact(id)
         .then(response => {
-          contactService
-            .getAll()
-            .then(updatedContacts => {
-              setPersons(updatedContacts)
-            })
-          setMessage(`${response.name} has been deleted.`)
-          setMessageColor('green')
-          setTimeout(() => {
-            setMessage(null);
-          }, 5000)
+          getContacts()
+          notificationMessage(`${response.name} has been deleted.`, 'green')
         })
+        .catch(error => {
+          if(error.response.status === 404){
+            notificationMessage(`Information of ${name} has already been removed from server.`, 'red')
+          }
+          getContacts()
+        }) 
     }
+
     
   }
 
@@ -69,6 +85,9 @@ const App = () => {
         message={message}
         setMessage={setMessage}
         setMessageColor={setMessageColor}
+        notificationMessage={notificationMessage}
+        getContacts={getContacts}
+        resetForm={resetForm}
       />
       <Contact contactList={filteredList} handleDelete={deleteNumber} />
     </>

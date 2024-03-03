@@ -9,10 +9,9 @@ const ContactForm = ({
   setNewName,
   setNewNumber,
   newNumber,
-  message,
-  setMessage,
-  setMessageColor
-  
+  notificationMessage,
+  getContacts,
+  resetForm
   }) => {
 
   const nameHandleChange = (event) => {
@@ -39,21 +38,19 @@ const ContactForm = ({
         contactService
           .updateContact(newEntry, newEntry.id)
           .then(response => {
-            contactService
-            .getAll()
-            .then(updatedContacts => {
-              setPersons(updatedContacts)
-              console.log(response)
-              setMessage(`${response.name} contact information has been updated`)
-              setMessageColor('green');
-              setTimeout(() => {
-                setMessage(null)
-              }, 5000)
-            })
+            getContacts()
+            notificationMessage(`${response.name} contact information has been updated`,'green')
           })
+          .catch(error => {
+            if(error.response.status === 404){
+              notificationMessage(`Information for ${newEntry.name} has been deleted from the server already`,'red');
+            }
+            getContacts()
+          })
+        resetForm()
+        return;
       }else{
-        setNewName('');
-        setNewNumber('');
+        resetForm()
         return;
       }
       
@@ -63,8 +60,7 @@ const ContactForm = ({
         .then(returnedContact => {
           setPersons(persons.concat(returnedContact))
         })
-      setNewName('');
-      setNewNumber('');
+      resetForm()
     }
   }
 
