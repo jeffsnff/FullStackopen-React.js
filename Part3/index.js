@@ -21,11 +21,31 @@ let notes = [
 ]
 
 app.get('/', (request, response) => {
-  response.send('<h1>Hello World</h1>')
+  response.send('<h1>Backend Server Class</h1>')
 })
 
 app.get('/api/notes', (request, response) => {
   response.json(notes)
+})
+
+app.get('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id);
+  const note = notes.find(note => {
+    return note.id === id
+  })
+  if(note){
+    return response.json(note)
+  }else{
+    return response.status(404).end()
+  }
+})
+
+app.delete('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id)
+  notes = notes.filter(note => {
+    return note.id !== id
+  })
+  response.status(204).end()
 })
 
 const PORT = 3001
