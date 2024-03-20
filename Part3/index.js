@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express()
 
+app.use(express.json())
 
 let notes = [
   {
@@ -20,6 +21,11 @@ let notes = [
   }
 ]
 
+function generateID(){
+  const maxID = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0;
+  return maxID + 1
+}
+
 app.get('/', (request, response) => {
   response.send('<h1>Backend Server Class</h1>')
 })
@@ -38,6 +44,21 @@ app.get('/api/notes/:id', (request, response) => {
   }else{
     return response.status(404).end()
   }
+})
+
+app.post('/api/notes', (request, response) => {
+  const body = request.body;
+
+  if(!body.content){
+    return response.status(400).json({error: 'content missing'});
+  }
+  const note = {
+    content: body.content,
+    important: Boolean(body.important) || false,
+    id: generateID(),
+  }
+  notes = notes.concat(note);
+  response.json(note)
 })
 
 app.delete('/api/notes/:id', (request, response) => {
