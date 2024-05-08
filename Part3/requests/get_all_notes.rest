@@ -1,6 +1,6 @@
 
 GET http://localhost:3001/api/notes
-###
+### GET All Notes
 
 GET http://localhost:3001/api/notes/2
-###
+### GET Single Note

@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const PORT = 3001;
 
+const generateID = () => {
+  const maxID = notes.length > 0 ? Math.max(...notes.map(note => note.id)) : 0;
+  return maxID + 1;
+}
+
+app.use(express.json())
 let notes = [
   {
     id:1,
@@ -42,6 +48,25 @@ app.get('/api/notes/:id', (request, response) => {
     
     response.status(404).end()
   }
+})
+
+app.post('/api/notes', (request, response) => {
+  const body = request.body;
+  if(!body.content){
+    return response.status(400).json({
+      error: "Content Missing"
+    });
+  }
+
+  const note = {
+    content: body.content,
+    important: Boolean(body.important) || false,
+    id: generateID()
+  }
+
+  notes = notes.concat(note);
+  response.json(note);
+
 })
 
 app.delete('/app/notes/:id', (request, response) => {

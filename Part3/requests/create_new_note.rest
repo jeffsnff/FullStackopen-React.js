@@ -3,6 +3,5 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-  "content": "This is from REST Client",
-  "important": true
+  "content": "This is from REST Client with updated POST Request"
 }
