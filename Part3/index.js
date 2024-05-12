@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors')
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(cors())
@@ -31,7 +31,7 @@ let notes = [
 ]
 
 app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>');
+  response.send('<div><h1>Welcome to my backend</h1><p>Follow the routes below</p><p>${URL}/api/notes</p><p>${URL}/api/notes/:id</p></div>');
 });
 
 app.get('/api/notes', (request, response) => {
