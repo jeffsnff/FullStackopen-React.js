@@ -1,13 +1,15 @@
 const express = require('express');
+const cors = require('cors')
 const app = express();
+app.use(cors())
 const PORT = 3001;
-
+app.use(express.json())
 const generateID = () => {
   const maxID = notes.length > 0 ? Math.max(...notes.map(note => note.id)) : 0;
   return maxID + 1;
 }
 
-app.use(express.json())
+
 let notes = [
   {
     id:1,
