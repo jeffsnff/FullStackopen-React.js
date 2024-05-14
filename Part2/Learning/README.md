@@ -1,8 +1,8 @@
-# React + Vite
+# 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Deployed
+This repo is deployed with Fly.io. 
+I wanted to add a few steps on how to update the deployment if I make any code changes. 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+After making code changes type : fly deploy
+After a successful deploy type : fly apps open
