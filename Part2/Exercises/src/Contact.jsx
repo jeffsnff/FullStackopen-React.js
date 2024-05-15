@@ -13,7 +13,7 @@ function Contact({ contactList, handleDelete }){
         id={person.id}
         handleDelete={handleDelete}
       />
-    )
+    );
   })
 
   return(

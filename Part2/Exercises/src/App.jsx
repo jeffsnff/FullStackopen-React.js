@@ -23,15 +23,14 @@ const App = () => {
       .getAll()
       .then(initialContacts => {
         setPersons(initialContacts);
-      }) 
+      });
   }
   function notificationMessage(message, color){
-    setMessage(message)
+    setMessage(message);
     setMessageColor(color);
-
     setTimeout(() => {
       setMessage(null);
-    }, 5000)
+    }, 5000);
   }
 
   function resetForm(){
@@ -41,27 +40,25 @@ const App = () => {
   }
 
   useEffect(() => {
-    getContacts()
+    getContacts();
   },[]);
 
   const deleteNumber = (name,id) => {
-    const deleteConfirmation = confirm(`Are you sure you want to delete ${name}?`)
+    const deleteConfirmation = confirm(`Are you sure you want to delete ${name}?`);
     if(deleteConfirmation){
       contactService
         .deleteContact(id)
         .then(response => {
-          getContacts()
-          notificationMessage(`${name} has been deleted.`, 'green')
+          getContacts();
+          notificationMessage(`${name} has been deleted.`, 'green');
         })
         .catch(error => {
           if(error.response.status === 404){
-            notificationMessage(`Information of ${name} has already been removed from server.`, 'red')
+            notificationMessage(`Information of ${name} has already been removed from server.`, 'red');
           }
-          getContacts()
+          getContacts();
         }) 
-    }
-
-    
+    }    
   }
 
   // This filters the persons array

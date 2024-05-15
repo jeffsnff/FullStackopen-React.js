@@ -35,12 +35,12 @@ const ContactForm = ({
 
       if(updateConfirmation){
         const nameToUpdate = persons.find((person) => person.name === newEntry.name)
-        newEntry.id = nameToUpdate.id
+        newEntry.id = nameToUpdate.id;
         contactService
           .updateContact(newEntry, newEntry.id)
           .then(response => {
-            getContacts()
-            notificationMessage(`${response.name}s' contact information has been updated`,'green')
+            getContacts();
+            notificationMessage(`${response.name}s' contact information has been updated`,'green');
           })
           .catch(error => {
             if(error.response.status === 404){
@@ -48,10 +48,10 @@ const ContactForm = ({
             }
             getContacts()
           })
-        resetForm()
+        resetForm();
         return;
       }else{
-        resetForm()
+        resetForm();
         return;
       }
       
@@ -59,9 +59,9 @@ const ContactForm = ({
       contactService
         .create(newEntry)
         .then(returnedContact => {
-          setPersons(persons.concat(returnedContact))
+          setPersons(persons.concat(returnedContact));
         })
-      resetForm()
+      resetForm();
     }
   }
 

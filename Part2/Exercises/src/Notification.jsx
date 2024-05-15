@@ -1,7 +1,7 @@
 
 const Notification = ({message, color}) => {
   if(message === null){
-    return null
+    return null;
   }
 
   return (
