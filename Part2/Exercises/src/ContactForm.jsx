@@ -40,7 +40,7 @@ const ContactForm = ({
           .updateContact(newEntry, newEntry.id)
           .then(response => {
             getContacts()
-            notificationMessage(`${response.name} contact information has been updated`,'green')
+            notificationMessage(`${response.name}s' contact information has been updated`,'green')
           })
           .catch(error => {
             if(error.response.status === 404){

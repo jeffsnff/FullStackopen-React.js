@@ -45,13 +45,13 @@ const App = () => {
   },[]);
 
   const deleteNumber = (name,id) => {
-    const deleteConfirmation = confirm(`Are you sure you want to delete${name}?`)
+    const deleteConfirmation = confirm(`Are you sure you want to delete ${name}?`)
     if(deleteConfirmation){
       contactService
         .deleteContact(id)
         .then(response => {
           getContacts()
-          notificationMessage(`${response.name} has been deleted.`, 'green')
+          notificationMessage(`${name} has been deleted.`, 'green')
         })
         .catch(error => {
           if(error.response.status === 404){
