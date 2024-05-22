@@ -18,32 +18,31 @@ const noteSchema = new mongoose.Schema({
   important: Boolean,
 })
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-})
-
 const Note = mongoose.model('Note', noteSchema)
-const User = mongoose.model('User', userSchema)
 
 const note = new Note({
   content: "This is a false note",
   important: false,
 })
 
-const user = new User({
-  username: 'Professor Chaos',
-  password: 'password',
-})
-
-// note.save().then(result => {
-//   console.log("Note Saved!")
-//   mongoose.connection.close()
-// })
-
-Note.find({important: false}).then( result => {
-  result.forEach(note => {
-    console.log(note)
-  })
+note.save().then(result => {
+  console.log("Note Saved!")
   mongoose.connection.close()
 })
+
+// const userSchema = new mongoose.Schema({
+//   username: String,
+//   password: String,
+// })
+// const User = mongoose.model('User', userSchema)
+// const user = new User({
+//   username: 'Professor Chaos',
+//   password: 'password',
+// })
+
+// Note.find({important: false}).then( result => {
+//   result.forEach(note => {
+//     console.log(note)
+//   })
+//   mongoose.connection.close()
+// })
