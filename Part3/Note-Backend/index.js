@@ -1,32 +1,10 @@
-const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
-const env = require('dotenv').config()
 const PORT = process.env.PORT || 3001;
-const password = process.env.PASSWORD;
+const Note = require('./models/note.js');
 const app = express();
 app.use(cors());
 app.use(express.json());
-const url = `mongodb+srv://fullstack-notes:${password}@notes-database.julpkqu.mongodb.net/noteApp?retryWrites=true&w=majority`;
-
-
-mongoose.set('strictQuery', false);
-mongoose.connect(url);
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
-});
-
-noteSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
-
-const Note = mongoose.model('Note', noteSchema);
 
 const generateID = () => {
   const maxID = notes.length > 0 ? Math.max(...notes.map(note => note.id)) : 0;
