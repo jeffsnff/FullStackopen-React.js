@@ -75,13 +75,12 @@ app.post('/api/notes', (request, response) => {
 
 })
 
-app.delete('/app/notes/:id', (request, response) => {
-  const id = Number(request.params.id);
-  notes = notes.filter(note => {
-    return note.id !== id;
-  })
-
-  response.status(204).end()
+app.delete('/api/notes/:id', (request, response) => {
+  Note.findByIdAndDelete(request.params.id)
+    .then(result => {
+      response.status(204).end();
+    })
+    .catch(error => next(error));
 })
 
 const errorHandler = (error, request, response, next) => {
