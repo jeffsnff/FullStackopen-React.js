@@ -5,6 +5,7 @@ const PORT = process.env.PORT;
 const Note = require('./models/note.js');
 const app = express();
 app.use(cors());
+app.use(express.static('dist'))
 app.use(express.json());
 
 const generateID = () => {
@@ -42,14 +43,17 @@ app.get('/api/notes', (request, response) => {
   })
 });
 
-app.get('/api/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response, next) => {
   Note.findById(request.params.id).then(note => {
     if(note){
       response.json(note);
     }else{
       response.status(404).end();
     }
-  });
+  })
+  .catch(error => {
+    next(error)
+  })
 });
 
 app.post('/api/notes', (request, response) => {
@@ -80,5 +84,13 @@ app.delete('/app/notes/:id', (request, response) => {
   response.status(204).end()
 })
 
+const errorHandler = (error, request, response, next) => {
+  // console.log(error)
+  if(error.name === 'CastError'){
+    response.status(400).send({ error: 'malformatted id'})
+  }
+  next(error)
+}
+app.use(errorHandler)
 app.listen(PORT);
 console.log(`Sever is running on PORT : ${PORT}`);
