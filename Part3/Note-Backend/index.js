@@ -9,29 +9,6 @@ app.use(cors());
 app.use(express.static('dist'))
 app.use(express.json());
 
-const generateID = () => {
-  const maxID = notes.length > 0 ? Math.max(...notes.map(note => note.id)) : 0;
-  return maxID + 1;
-}
-
-let notes = [
-  {
-    id:1,
-    content: 'HTML is easy',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    important: true
-  }
-]
-
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
   console.log('Path:  ', request.path)
