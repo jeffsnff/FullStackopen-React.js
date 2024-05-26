@@ -1,5 +1,5 @@
-const express = require('express');
 require('dotenv').config()
+const express = require('express');
 const cors = require('cors');
 const PORT = process.env.PORT;
 const Note = require('./models/note.js');
@@ -60,20 +60,20 @@ app.get('/api/notes/:id', (request, response) => {
 
 app.post('/api/notes', (request, response) => {
   const body = request.body;
-  if(!body.content){
+  if(body.content === undefined){
     return response.status(400).json({
       error: "Content Missing"
     });
   }
 
-  const note = {
+  const note = new Note({
     content: body.content,
-    important: Boolean(body.important) || false,
-    id: generateID()
-  }
+    important: body.important || false,
+  })
 
-  notes = notes.concat(note);
-  response.json(note);
+  note.save().then(savedNote => {
+    response.json(savedNote)
+  })
 
 })
 
