@@ -43,20 +43,14 @@ app.get('/api/notes', (request, response) => {
 });
 
 app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id);
-  const note = notes.find( note => {
-    if(id === note.id){
-      return note;
+  Note.findById(request.params.id).then(note => {
+    if(note){
+      response.json(note);
+    }else{
+      response.status(404).end();
     }
   });
-  
-  if(note){
-    response.json(note);
-  }  else {
-    
-    response.status(404).end()
-  }
-})
+});
 
 app.post('/api/notes', (request, response) => {
   const body = request.body;
