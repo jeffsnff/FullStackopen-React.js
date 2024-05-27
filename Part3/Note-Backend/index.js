@@ -21,6 +21,8 @@ const errorHandler = (error, request, response, next) => {
   console.error(error.message)
   if(error.name === 'CastError'){
     response.status(400).send({ error: 'malformatted id'})
+  }else if(error.name === 'ValidationError'){
+    return response.status(400).json({error : error.message })
   }
   next(error)
 }
@@ -56,22 +58,19 @@ app.get('/api/notes/:id', (request, response, next) => {
   })
 });
 
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   const body = request.body;
-  if(body.content === undefined){
-    return response.status(400).json({
-      error: "Content Missing"
-    });
-  }
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
   })
 
-  note.save().then(savedNote => {
+  note.save()
+    .then(savedNote => {
     response.json(savedNote)
   })
+    .catch(error => next(error))
 
 })
 
