@@ -1,5 +1,5 @@
 const config = require('./utils/config.js')
-const logger = require('./utils/logger.js')
+const middleware = require('./utils/middleware.js')
 const express = require('express');
 const cors = require('cors');
 const Note = require('./models/note.js');
@@ -9,28 +9,29 @@ app.use(cors());
 app.use(express.static('dist'))
 app.use(express.json());
 
-const requestLogger = (request, response, next) => {
-  logger.info('Method:', request.method)
-  logger.info('Path:', request.path)
-  logger.info('Body:', request.body)
-  logger.info('---')
-  next()
-}
+// const requestLogger = (request, response, next) => {
+//   logger.info('Method:', request.method)
+//   logger.info('Path:', request.path)
+//   logger.info('Body:', request.body)
+//   logger.info('---')
+//   next()
+// }
 
-const errorHandler = (error, request, response, next) => {
-  if(error.name === 'CastError'){
-    response.status(400).send({ error: 'malformatted id'})
-  }else if(error.name === 'ValidationError'){
-    return response.status(400).json({error : error.message })
-  }
-  next(error)
-}
+// const errorHandler = (error, request, response, next) => {
+//   logger.error(error.message)
+//   if(error.name === 'CastError'){
+//     response.status(400).send({ error: 'malformatted id'})
+//   }else if(error.name === 'ValidationError'){
+//     return response.status(400).json({error : error.message })
+//   }
+//   next(error)
+// }
 
-app.use(requestLogger)
+app.use(middleware.requestLogger)
 
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({error: 'unknown endpoint'})
-}
+// const unknownEndpoint = (request, response) => {
+//   response.status(404).send({error: 'unknown endpoint'})
+// }
 
 // This is the first page that loads. This does NOT get all notes
 app.get('/', (request, response) => {
@@ -87,8 +88,8 @@ app.delete('/api/notes/:id', (request, response, next) => {
     .catch(error => next(error));
 })
 
-app.use(errorHandler)
-app.use(unknownEndpoint)
+app.use(middleware.errorHandler)
+app.use(middleware.unknownEndpoint)
 
 app.listen(config.PORT);
 console.log(`Sever is running on PORT : ${config.PORT}`);
