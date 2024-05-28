@@ -1,9 +1,8 @@
-require('dotenv').config()
+const config = require('./utils/config.js')
 const express = require('express');
 const cors = require('cors');
 const Note = require('./models/note.js');
 const app = express();
-const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.static('dist'))
@@ -96,5 +95,5 @@ app.delete('/api/notes/:id', (request, response, next) => {
 app.use(errorHandler)
 app.use(unknownEndpoint)
 
-app.listen(PORT);
-console.log(`Sever is running on PORT : ${PORT}`);
+app.listen(config.PORT);
+console.log(`Sever is running on PORT : ${config.PORT}`);
