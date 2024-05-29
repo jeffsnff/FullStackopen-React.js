@@ -1,73 +1,7 @@
-const config = require('./utils/config.js')
-const middleware = require('./utils/middleware.js')
-const express = require('express');
-const cors = require('cors');
-const Note = require('./models/note.js');
-const app = express();
+const app = require('./app')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 
-app.use(cors());
-app.use(express.static('dist'))
-app.use(express.json());
-
-app.use(middleware.requestLogger)
-
-// This is the first page that loads. This does NOT get all notes
-app.get('/', (request, response) => {
-  response.send('<div><h1>Welcome to my backend</h1><p>Follow the routes below</p><p>${URL}/api/notes</p><p>${URL}/api/notes/:id</p></div>');
-});
-
-// Grabs all the notes in the database
-app.get('/api/notes', (request, response) => {
-  Note.find({}).then(notes => {
-    response.json(notes);
-  })
-});
-
-app.get('/api/notes/:id', (request, response, next) => {
-  Note.findById(request.params.id).then(note => {
-    if(note){
-      response.json(note);
-    }else{
-      response.status(404).end();
-    }
-  })
-  .catch(error => {
-    next(error)
-  })
-});
-
-app.post('/api/notes', (request, response, next) => {
-  const body = request.body;
-  const note = new Note({
-    content: body.content,
-    important: body.important || false,
-  })
-  note.save()
-    .then(savedNote => {
-    response.json(savedNote)
-  })
-    .catch(error => next(error))
-})
-
-app.put('/api/notes/:id', (request, response, next) => {
-  const {content, important} = request.body;
-  Note.findByIdAndUpdate(request.params.id, {content, important}, {new: true, runValidators: true, context: 'query'})
-    .then(updateNote => {
-      response.json(updateNote)
-    })
-    .catch(error => next(error))
-})
-
-app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndDelete(request.params.id)
-    .then(result => {
-      response.status(204).end();
-    })
-    .catch(error => next(error));
-})
-
-app.use(middleware.errorHandler)
-app.use(middleware.unknownEndpoint)
 
 app.listen(config.PORT);
 console.log(`Sever is running on PORT : ${config.PORT}`);
