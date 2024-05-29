@@ -9,29 +9,7 @@ app.use(cors());
 app.use(express.static('dist'))
 app.use(express.json());
 
-// const requestLogger = (request, response, next) => {
-//   logger.info('Method:', request.method)
-//   logger.info('Path:', request.path)
-//   logger.info('Body:', request.body)
-//   logger.info('---')
-//   next()
-// }
-
-// const errorHandler = (error, request, response, next) => {
-//   logger.error(error.message)
-//   if(error.name === 'CastError'){
-//     response.status(400).send({ error: 'malformatted id'})
-//   }else if(error.name === 'ValidationError'){
-//     return response.status(400).json({error : error.message })
-//   }
-//   next(error)
-// }
-
 app.use(middleware.requestLogger)
-
-// const unknownEndpoint = (request, response) => {
-//   response.status(404).send({error: 'unknown endpoint'})
-// }
 
 // This is the first page that loads. This does NOT get all notes
 app.get('/', (request, response) => {
